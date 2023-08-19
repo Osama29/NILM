@@ -23,6 +23,8 @@ sudo apt-get install rpi.gpio
 Setting up the I2C pins on the raspberry Pi is super easy and will only take a couple of minutes to do.
 Secondly, go to the Raspi-config tool by entering the following command.
 
+![alt text here](https://pimylifeup.com/wp-content/uploads/2015/09/Raspberry-Pi-SPI-and-I2C.png)
+
 ```powershell
 sudo raspi-config
 ```
