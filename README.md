@@ -38,3 +38,65 @@ now we want to make sure it has successfully enabled the necessary modules. To t
 ```powershell
 lsmod | grep i2c_
 ```
+
+***
+### Raspberry Pi Wiring and configuration
+
+To connect the Raspberry Pi to the PZEM-004t correctly to collect the measurements of the appliances such as voltage, current, power, e4nergy, frequency, power factor.
+
+#### the wiring goes like:
+| Raspberry PI GPIO | PZEM-004t |
+| ----------------- | --------- |
+| 5V ( GPIO 2)      | 5v        |
+| GND ( GPIO 6)     | GND       |
+| TX (GPIO 14)      | RX        | 
+|RX (GPIO 15)       | TX        | 
+
+
+![alt text here](https://github.com/Osama29/NILM/blob/main/Images/Screenshot%202023-08-19%20193237.png?raw=true)
+
+***
+### Download Modbus Library
+
+ In order to have a functioning code, you will need to download Modbus-tk which is the serial communication encoding that is used between the PZEM-004t and Raspberry Pi. to download it, just type the following code in the terminal in your Raspberry Pi:
+
+ ```powershell
+sudo apt-get install modbus-tk
+```
+
+then run the python code under the name: `PZEM-004t Raspberry Pi.py` which must run effortlessly. 
+
+***
+## Troubleshooting
+
+Incase you were using a TTL to UART Module which use the USB port of the Raspberry Pi, then all you have to do is connect the USB Module and then change the following code in the `PZEM-004t Raspberry Pi.py`:
+
+```python
+if __name__ == '__main__':
+  try:
+      serial_port = serial.Serial(
+                                  port '/dev/ttyS0',
+                                  baudrate = 9600,
+                                  bytesize= 8,
+                                  parity='N',
+                                  stopbits=1,
+                                  xonxoff=0
+                                  )
+```
+
+Change the code to the following code:
+
+```python
+if __name__ == '__main__':
+  try:
+      serial_port = serial.Serial(
+                                  port '/dev/ttyUSB0',
+                                  baudrate = 9600,
+                                  bytesize= 8,
+                                  parity='N',
+                                  stopbits=1,
+                                  xonxoff=0
+                                  )
+```
+
+by that you will gain the ability to use the USB module to connect to the PZEM-004t by connecting the TTL to UART Module., you hbave to make sure that the wiring and the hardware are connected correctly.
