@@ -151,7 +151,9 @@ sudo raspi-config
 ```
 
 2. after access the menu which will look like this
+   
 ![alt text here](https://pimylifeup.com/wp-content/uploads/2015/09/Raspberry-Pi-SPI-and-I2C.png)
+
 head to `3 Interface Options`
 
 3.  Press on `I6 Serial Port` and clcik `Yes` on the two option to enable the Serial port and avoid the error.
