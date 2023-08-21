@@ -99,9 +99,12 @@ if __name__ == '__main__':
                                   xonxoff=0
                                   )
 ```
+by that you will gain the ability to use the USB module to connect to the PZEM-004t by connecting the TTL to UART Module., you hbave to make sure that the wiring and the hardware are connected correctly.
 
+***
 ## Troubleshooting
 
+### No Module named 'modbus_tk'
 if you were trying to run `PZEM-004t Raspberry Pi.py` and it showed the following error:
 ```powershell
 Traceback (most recent call last):
@@ -118,4 +121,19 @@ Then all you have to do is to run this comand in the terminal:
 sudo pip3 install modbus-tk
 ```
 
-by that you will gain the ability to use the USB module to connect to the PZEM-004t by connecting the TTL to UART Module., you hbave to make sure that the wiring and the hardware are connected correctly.
+### No Module named "serial"
+if you were trying to run `PZEM-004t Raspberry Pi.py` and it showed the following error:
+
+```powershell
+Traceback (most recent call last):
+  File "PZEM-004t Raspberry Pi.py", line 3, in <module>
+    import serial
+ImportError: No module named serial
+
+
+------------------
+(program exited with code: 1)
+Press return to continue
+```
+
+
