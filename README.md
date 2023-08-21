@@ -1,10 +1,10 @@
 # NILM
 Non-Intrusive Load Monitoring Device
 
-This is a simplified version of the NILM devices where it implement Raspberry PI 4B and PZEM-004t which is current and voltage sensor. 
+This is a simplified version of the NILM devices where it implement Raspberry PI 4B and PZEM-004t which is current and voltage sensor. where it works as electical monitor that have a website deployed from the Raspberry Pi, it use machine learning to understand the behaviour of the appliance and give predictions based on it.
 
 Firstly, you have to setup the raspberry pi 
-### Configuring and using the pins
+## Configuring and using the pins
 
 Update and upgrade to the latest version of `Raspbian` using the following commands
 
@@ -18,7 +18,7 @@ if you dont have the GPIO package installed, you simply install it by running th
 sudo apt-get install rpi.gpio
 ```
 
-### Configuring Raspberry Pi I2C
+## Configuring Raspberry Pi I2C
 
 Setting up the I2C pins on the raspberry Pi is super easy and will only take a couple of minutes to do.
 Secondly, go to the Raspi-config tool by entering the following command.
@@ -40,7 +40,7 @@ lsmod | grep i2c_
 ```
 
 ***
-### Raspberry Pi Wiring and configuration
+## Raspberry Pi Wiring and configuration
 
 To connect the Raspberry Pi to the PZEM-004t correctly to collect the measurements of the appliances such as voltage, current, power, e4nergy, frequency, power factor.
 
@@ -56,19 +56,20 @@ To connect the Raspberry Pi to the PZEM-004t correctly to collect the measuremen
 ![alt text here](https://github.com/Osama29/NILM/blob/main/Images/Screenshot%202023-08-19%20193237.png?raw=true)
 
 ***
-### Download Modbus Library
+## Download Modbus Library
 
  In order to have a functioning code, you will need to download Modbus-tk which is the serial communication encoding that is used between the PZEM-004t and Raspberry Pi. to download it, just type the following code in the terminal in your Raspberry Pi:
 
  ```powershell
-sudo apt-get install modbus-tk
+sudo pip3 install modbus-tk
 ```
 
 then run the python code under the name: `PZEM-004t Raspberry Pi.py` which must run effortlessly. 
 
 ***
-## Troubleshooting
+## Extra Features
 
+### Implementation of UART to TTL USB module
 Incase you were using a TTL to UART Module which use the USB port of the Raspberry Pi, then all you have to do is connect the USB Module and then change the following code in the `PZEM-004t Raspberry Pi.py`:
 
 ```python
@@ -97,6 +98,24 @@ if __name__ == '__main__':
                                   stopbits=1,
                                   xonxoff=0
                                   )
+```
+
+## Troubleshooting
+
+if you were trying to run `PZEM-004t Raspberry Pi.py` and it showed the following error:
+```powershell
+Traceback (most recent call last):
+  File "/home/raspberrypi/PZEM-004t Raspberry Pi.py", line 4, in <module>
+     import modbus_tk.defines as cst
+ModuleNotFouundError: No module named 'modbus_tk'
+
+------------------
+(program exited with code: 1)
+Press return to continue
+```
+Then all you have to do is to run this comand in the terminal:
+```powershell
+sudo pip3 install modbus-tk
 ```
 
 by that you will gain the ability to use the USB module to connect to the PZEM-004t by connecting the TTL to UART Module., you hbave to make sure that the wiring and the hardware are connected correctly.
