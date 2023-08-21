@@ -66,6 +66,13 @@ sudo pip3 install modbus-tk
 
 then run the python code under the name: `PZEM-004t Raspberry Pi.py` which must run effortlessly. 
 
+*** 
+## Clone the Repository on your Raspberry Pi
+you can download the files using the simple command:
+```powershell
+git clone https://github.com/Osama29/NILM
+```
+
 ***
 ## Extra Features
 
@@ -136,4 +143,16 @@ ImportError: No module named serial
 Press return to continue
 ```
 
+you can solve this issue by applying these steps:
+
+1. Open your terminal on Raspberry Pi and type:
+```powershell
+sudo raspi-config
+```
+
+2. after access the menu which will look like this
+![alt text here](https://pimylifeup.com/wp-content/uploads/2015/09/Raspberry-Pi-SPI-and-I2C.png)
+head to `3 Interface Options`
+
+3.  Press on `I6 Serial Port` and clcik `Yes` on the two option to enable the Serial port and avoid the error.
 
