@@ -17,7 +17,7 @@ master.set_timeout(2.0)
 master.set_verbose(True)
 
 while True:
-    data = master.exewcute(1, cst.READ_INPUT_REGISTERS, 0, 10)
+    data = master.execute(1, cst.READ_INPUT_REGISTERS, 0, 10)
     voltage = data[0] / 10.0
     current = (data[1] + (data[2] << 16)) / 1000.0
     power = (data[3] + (data[4] << 16)) / 10.0

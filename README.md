@@ -156,5 +156,12 @@ sudo raspi-config
 
 head to `3 Interface Options`
 
-3.  Press on `I6 Serial Port` and clcik `Yes` on the two option to enable the Serial port and avoid the error.
+3.  Press on `I6 Serial Port` and click `No` for the first option.
 
+4. Click `Yes` for the second option.
+
+5. Click `Finish`
+
+6. Type `reboot` to reboot the system after saving the changes
+
+7. Done
