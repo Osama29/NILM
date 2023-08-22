@@ -91,7 +91,7 @@ if __name__ == '__main__':
                 dict_payload["std_frequency"]= std_frequency
                 dict_payload["std_powerFactor"]= std_power_factor
 
-                str_payload = json.dump(dict_payload, indent= 2)
+                str_payload = json.dumps(dict_payload, indent= 2)
                 print(str_payload)
 
                 date= time.strftime("%Y-%m-%d")
