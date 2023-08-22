@@ -4,9 +4,12 @@ import json
 import statistics
 import modbus_tk.defines as cst
 from modbus_tk import modbus_rtu
+import csv
+
+CSV_FILE_NAME= "Fridge.csv"
 
 serial = serial.Serial(
-                        port= '/dev/ttyS0',
+                        port= '/dev/ttyUSB0',
                         baudrate= 9600,
                         bytesize= 8,
                         parity= 'N',
@@ -54,17 +57,64 @@ if __name__ == '__main__':
                     alarm_list.append(alarm)
 
                 time_hour = time.strftime("%H:%M:%S")
+
+                # Calculate the average values
+                avg_voltage= round(sum(voltage_list) / len(voltage_list), 2)
+                avg_current= round(sum(current_list) / len(current_list), 2)
+                avg_power= round(sum(power_list) / len(power_list), 2)
+                avg_energy= round(sum(energy_list) / len(energy_list), 2)
+                avg_frequency= round(sum(frequency_list) / len(frequency_list), 2)
+                avg_power_factor= round(sum(powerFactor_list) / len(powerFactor_list), 2)
+                avg_alarm= round(sum(alarm_list) / len(alarm_list), 2)
+
+                # Calculate thge standard deviation values
+                std_voltage= round(statistics.stdev(voltage_list), 2)
+                std_current= round(statistics.stdev(current_list), 2)
+                std_power= round(statistics.stdev(power_list), 2)
+                std_energy= round(statistics.stdev(energy_list), 2)
+                std_frequency=- round(statistics.stdev(frequency_list), 2)
+                std_power_factor= round(statistics.stdev(powerFactor_list), 2)
+                std_alarm= round(statistics.stdev(alarm_list), 2)
             
                 dict_payload["Time"]= time_hour
-                dict_payload["voltage"]= voltage
-                dict_payload["current"]= current
-                dict_payload["power"]= power
-                dict_payload["energy"]= energy
-                dict_payload["frequency"]= frequency
-                dict_payload["powerFactor"]= power_factor
+                dict_payload["voltage"]= avg_voltage
+                dict_payload["current"]= avg_current
+                dict_payload["power"]= avg_power
+                dict_payload["energy"]= avg_energy
+                dict_payload["frequency"]= avg_frequency
+                dict_payload["powerFactor"]= avg_power_factor
+
+                dict_payload["std_voltage"]= std_voltage
+                dict_payload["std_current"]= std_current
+                dict_payload["std_power"]= std_power
+                dict_payload["std_energy"]= std_energy
+                dict_payload["std_frequency"]= std_frequency
+                dict_payload["std_powerFactor"]= std_power_factor
 
                 str_payload = json.dump(dict_payload, indent= 2)
                 print(str_payload)
+
+                date= time.strftime("%Y-%m-%d")
+
+                # Store data in the CSV File
+                with open(CSV_FILE_NAME, 'a', newline='') as file:
+                    writer= csv.writer(file)
+                    writer.writerow([date, 
+                                     time_hour,
+                                     avg_voltage,
+                                     avg_current,
+                                     avg_power,
+                                     avg_energy,
+                                     avg_frequency,
+                                     avg_power_factor,
+                                     avg_alarm,
+                                     std_voltage,
+                                     std_current,
+                                     std_power,
+                                     std_energy,
+                                     std_frequency,
+                                     std_power_factor,
+                                     std_alarm])
 
 
 
