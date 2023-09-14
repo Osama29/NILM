@@ -21,6 +21,7 @@ if __name__ == '__main__':
         dict_payload = dict()
         measurements_per_second = 15
         interval = 1 / measurements_per_second
+        sample_count = 0 # Initialize the sample count to zero
 
         while True:
             try:
@@ -48,6 +49,8 @@ if __name__ == '__main__':
                     power_factor_list.append(power_factor)
                     alarm_list.append(alarm)
 
+                    
+
                 # Calculate the average values
                 avg_voltage = round(sum(voltage_list) / len(voltage_list), 2)
                 avg_current = round(sum(current_list) / len(current_list), 2)
@@ -65,6 +68,8 @@ if __name__ == '__main__':
                 std_frequency = round(statistics.stdev(frequency_list), 2)
                 std_power_factor = round(statistics.stdev(power_factor_list), 2)
                 std_alarm = round(statistics.stdev(alarm_list), 2)      
+
+                sample_count += 1 # Increment the sample count woth each successful measurement
 
                 time_hour = time.strftime("%H:%M:%S")
 
@@ -84,6 +89,8 @@ if __name__ == '__main__':
                 dict_payload["std_frequency"] = std_frequency
                 dict_payload["std_power_factor"] = std_power_factor
                 dict_payload["std_alarm"] = std_alarm
+
+                dict_payload["sample_count"] = sample_count
 
                 str_payload = json.dumps(dict_payload, indent=2)
                 print(str_payload)
