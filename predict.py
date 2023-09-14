@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import joblib
 from collections import deque
+import os
 
 # Load the pre-trained KNN model
 model_filename = 'knn_model.joblib'
